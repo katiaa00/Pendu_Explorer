@@ -1,0 +1,54 @@
+:root {
+  --bg: #0f1222;
+  --card: #191e36;
+  --text: #eef1ff;
+  --muted: #aab0d6;
+  --accent: #7aa2ff;
+  --danger: #ff6b6b;
+  --ok: #5dd39e;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+
+h1 { margin: 8px 0 4px; font-size: clamp(24px, 3vw, 34px); }
+.subtitle { color: var(--muted); margin: 0 0 16px; }
+
+.levels { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 24px; }
+.btn { background: var(--accent); color: #0b0e1a; border: none; padding: 12px 18px; border-radius: 10px; font-weight: 700; text-decoration: none; display: inline-block; }
+.btn:hover { filter: brightness(1.08); }
+.btn.outline { background: transparent; border: 2px solid var(--accent); color: var(--text); }
+.btn:disabled { opacity: 0.5; pointer-events: none; }
+
+.rules { background: var(--card); padding: 16px; border-radius: 12px; }
+.rules h2 { margin: 0 0 8px; }
+
+.topbar { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; align-items: center; margin-bottom: 16px; }
+.link { color: var(--accent); text-decoration: none; }
+.tag { background: #253058; padding: 6px 10px; border-radius: 999px; font-size: 14px; justify-self: center; }
+.tries { color: var(--muted); justify-self: end; }
+
+.board { background: var(--card); border-radius: 12px; padding: 20px; margin-bottom: 16px; text-align: center; }
+.word { font-size: clamp(26px, 6vw, 40px); letter-spacing: 6px; word-break: break-word; }
+.used, .hint { color: var(--muted); margin-top: 8px; font-size: 14px; }
+
+.hangman { display:flex; justify-content:center; margin-bottom: 14px; }
+.hangman svg { width: min(420px, 90%); height: auto; }
+.pole  { stroke: #3a447a; stroke-width: 6; stroke-linecap: round; }
+.piece { stroke: var(--danger); stroke-width: 6; stroke-linecap: round; fill: none; visibility: hidden; }
+
+.keyboard { display: grid; grid-template-columns: repeat(9, 1fr); gap: 8px; }
+@media (max-width: 640px) {
+  .keyboard { grid-template-columns: repeat(7, 1fr); }
+}
+.key {
+  background: #212848; border: 1px solid #2b3564; color: var(--text);
+  padding: 10px 0; border-radius: 10px; text-align: center; cursor: pointer;
+  user-select: none; font-weight: 700;
+}
+.key:disabled { opacity: 0.5; cursor: default; }
+.key.hit { background: rgba(93, 211, 158, 0.15); border-color: var(--ok); }
+.key.miss { background: rgba(255, 107, 107, 0.15); border-color: var(--danger); }
+
+.actions { display: flex; gap: 10px; justify-content: center; margin-top: 16px; }

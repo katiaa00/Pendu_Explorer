@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pendu Explorer — Jeu</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="topbar">
+      <a class="link" href="index.html">← Accueil</a>
+      <div id="levelTag" class="tag">Niveau</div>
+      <div id="tries" class="tries">Essais : 6</div>
+    </header>
+
+    <section class="board">
+      <!-- Dessin du pendu -->
+      <div class="hangman">
+        <svg viewBox="0 0 200 220" aria-label="Pendu">
+          <!-- Poteau -->
+          <line x1="20" y1="200" x2="180" y2="200" class="pole"/>
+          <line x1="50" y1="200" x2="50" y2="20"  class="pole"/>
+          <line x1="50" y1="20"  x2="130" y2="20" class="pole"/>
+          <line x1="130" y1="20" x2="130" y2="45" class="pole"/>
+
+          <!-- Pièces (révélées au fur et à mesure) -->
+          <circle id="h-head" cx="130" cy="60" r="15" class="piece" />
+          <line   id="h-body" x1="130" y1="75" x2="130" y2="120" class="piece" />
+          <line   id="h-armL" x1="130" y1="90" x2="110" y2="110" class="piece" />
+          <line   id="h-armR" x1="130" y1="90" x2="150" y2="110" class="piece" />
+          <line   id="h-legL" x1="130" y1="120" x2="112" y2="150" class="piece" />
+          <line   id="h-legR" x1="130" y1="120" x2="148" y2="150" class="piece" />
+        </svg>
+      </div>
+
+      <div id="word" class="word">_ _ _ _</div>
+      <div id="used" class="used">Lettres : —</div>
+      <div id="hint" class="hint" hidden>Indice : —</div>
+    </section>
+
+    <section id="keyboard" class="keyboard"></section>
+
+    <footer class="actions">
+      <button id="btnRestart" class="btn">Rejouer</button>
+      <button id="btnHome" class="btn outline">Accueil</button>
+    </footer>
+  </main>
+
+  <script src="assets/js/game.js"></script>
+</body>
+</html>
