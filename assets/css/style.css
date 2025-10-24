@@ -175,7 +175,6 @@ body, html {
 }
 
 .mode-right {
-  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -273,11 +272,15 @@ body, html {
   line-height: 1.2;
 }
 
+/* MODALE RÈGLES */
+
 .rules-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,.4);
-  display: none;               
+  background: rgba(15,26,16,.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: none;           
   align-items: center;
   justify-content: center;
   padding: 24px;
@@ -313,10 +316,13 @@ body, html {
 .rules-modal ul {
   margin: 0 0 1rem;
   padding-left: 1rem;
+  line-height: 1.4;
 }
+
 .rules-modal li {
   margin-bottom: .5rem;
-  color: #2f3a31;
+  color: #0f1a10;
+  font-weight: 500;
   font-size: .85rem;
 }
 
@@ -344,30 +350,7 @@ body, html {
   }
 }
 
-/* RESPONSIVE */
-@media (max-width: 480px) {
-  .app-screen {
-    padding: 16px 14px;
-    border-radius: 20px;
-  }
-  .mode-icon-img {
-    width: 52px;
-    height: 52px;
-  }
-  .mode-name {
-    font-size: .95rem;
-  }
-  .mode-desc-short {
-    font-size: .8rem;
-  }
-  .badge {
-    font-size: .65rem;
-    padding: .3rem .5rem;
-  }
-}
-
 /* RESPONSIVE  */
-
 @media (max-width: 480px) {
 
   .app-screen {
@@ -380,15 +363,16 @@ body, html {
   .logo-circle {
     width: 40px;
     height: 40px;
+    border-radius: 14px;
     font-size: 1rem;
   }
 
   .logo-title {
     font-size: .95rem;
   }
-
   .logo-sub {
-    font-size: .7rem;
+    font-size: .75rem;
+    line-height: 1.2;
   }
 
   .info-btn {
@@ -396,11 +380,6 @@ body, html {
     height: 30px;
     font-size: .8rem;
     border-radius: 8px;
-  }
-
-  .mode-select-card {
-    gap: 12px;
-    margin-top: 20px;
   }
 
   .mode-select-title {
@@ -425,22 +404,19 @@ body, html {
     border-radius: 6px;
   }
 
-  .mode-row-top {
-    gap: 6px;
-  }
-
   .mode-name {
     font-size: .95rem;
   }
 
   .badge {
     font-size: .65rem;
+    padding: .35rem .55rem;
     min-width: 64px;
-    padding: .35rem .5rem;
   }
 
   .mode-desc-short {
     font-size: .8rem;
+    line-height: 1.3;
     max-width: 200px;
   }
 
@@ -457,29 +433,6 @@ body, html {
 
   .footer-copy {
     font-size: .65rem;
-  }
-
-  .rules-modal {
-    max-width: 300px;
-    border-radius: 16px;
-    font-size: .85rem;
-    padding: 16px 16px 14px;
-  }
-
-  .rules-modal h3 {
-    font-size: .95rem;
-    margin-bottom: .6rem;
-  }
-
-  .rules-modal li {
-    font-size: .8rem;
-    margin-bottom: .4rem;
-  }
-
-  .close-modal-btn {
-    font-size: .85rem;
-    border-radius: 10px;
-    padding: .6rem .8rem;
   }
 }
 
@@ -498,14 +451,13 @@ body, html {
   .logo-circle {
     width: 36px;
     height: 36px;
+    border-radius: 10px;
     font-size: .9rem;
-    border-radius: 12px;
   }
 
   .logo-title {
     font-size: .9rem;
   }
-
   .logo-sub {
     font-size: .7rem;
   }
@@ -516,12 +468,8 @@ body, html {
     font-size: .75rem;
   }
 
-  .mode-select-title {
-    font-size: .95rem;
-  }
-
-  .mode-select-hint {
-    font-size: .7rem;
+  .badge {
+    min-width: 58px;
   }
 
   .mode-button {
@@ -538,31 +486,13 @@ body, html {
     font-size: .9rem;
   }
 
-  .badge {
-    font-size: .6rem;
-    min-width: 58px;
-    padding: .3rem .45rem;
-    border-radius: 999px;
-  }
-
-  .mode-desc-short {
-    font-size: .75rem;
-    line-height: 1.3;
-    max-width: 180px;
-  }
-
   .footer-stats {
-    gap: 4px;
-  }
-
-  .stat-box {
-    min-width: 50px;
+    gap: 6px;
   }
 
   .stat-value {
     font-size: .85rem;
   }
-
   .stat-label {
     font-size: .6rem;
   }
@@ -571,7 +501,6 @@ body, html {
     font-size: .6rem;
   }
 }
-
 
 @media (min-width: 768px) {
   .app-body {

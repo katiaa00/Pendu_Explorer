@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f1a10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <title>Pendu Explorer</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
+
 <body class="app-body">
   <div class="app-screen">
 
@@ -22,10 +27,9 @@
       </div>
 
       <button class="info-btn" id="rulesBtn">?</button>
-
     </header>
 
-    <!-- select -->
+    <!-- sélecteur de mode -->
     <main class="mode-select-card">
       <h2 class="mode-select-title">Choisis ton mode</h2>
 
@@ -66,12 +70,12 @@
       </div>
     </main>
 
-    <!-- Footer -->
+    <!-- footer stats -->
     <footer class="app-footer">
       <div class="footer-stats">
         <div class="stat-box">
           <div class="stat-value">6</div>
-          <div class="stat-label">Essais</div>
+          <div class="stat-label">Erreurs max</div>
         </div>
         <div class="stat-box">
           <div class="stat-value">2</div>
@@ -87,43 +91,41 @@
     </footer>
   </div>
 
-<div class="rules-overlay" id="rulesOverlay">
-  <div class="rules-modal">
-    <h3>Règles du jeu</h3>
-    <ul>
-      <li>Tu as 6 erreurs max.</li>
-      <li>Chaque lettre ratée dessine le pendu.</li>
-      <li>Les accents et espaces ne comptent pas contre toi.</li>
-      <li>Tu peux jouer au clavier ou en touch.</li>
-    </ul>
-    <button class="close-modal-btn" id="closeRules">OK</button>
+  <!-- Modale Règles -->
+  <div class="rules-overlay" id="rulesOverlay">
+    <div class="rules-modal">
+      <h3>Règles du jeu</h3>
+      <ul>
+        <li>Tu as 6 erreurs max.</li>
+        <li>Chaque lettre ratée dessine le pendu.</li>
+        <li>Les accents et espaces ne comptent pas contre toi.</li>
+        <li>Tu peux jouer au clavier ou en touch.</li>
+      </ul>
+      <button class="close-modal-btn" id="closeRules">OK</button>
+    </div>
   </div>
-</div>
 
+  <script>
+    const rulesBtn = document.getElementById('rulesBtn');
+    const rulesOverlay = document.getElementById('rulesOverlay');
+    const closeRules = document.getElementById('closeRules');
 
-<script>
-  const rulesBtn = document.getElementById('rulesBtn');
-  const rulesOverlay = document.getElementById('rulesOverlay');
-  const closeRules = document.getElementById('closeRules');
+    // ouvrir la modale
+    rulesBtn.addEventListener('click', () => {
+      rulesOverlay.classList.add('open');
+    });
 
-  // ouvrir la modale
-  rulesBtn.addEventListener('click', () => {
-    rulesOverlay.classList.add('open');
-  });
-
-  // fermer via bouton OK
-  closeRules.addEventListener('click', () => {
-    rulesOverlay.classList.remove('open');
-  });
-
-  // fermer en cliquant 
-  rulesOverlay.addEventListener('click', (e) => {
-    if (e.target === rulesOverlay) {
+    // fermer via bouton OK
+    closeRules.addEventListener('click', () => {
       rulesOverlay.classList.remove('open');
-    }
-  });
-</script>
+    });
 
-
+    // fermer en cliquant à l'extérieur
+    rulesOverlay.addEventListener('click', (e) => {
+      if (e.target === rulesOverlay) {
+        rulesOverlay.classList.remove('open');
+      }
+    });
+  </script>
 </body>
 </html>

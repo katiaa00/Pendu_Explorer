@@ -3,49 +3,71 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0f1a10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
   <title>Pendu Explorer — Jeu</title>
-  <link rel="stylesheet" href="assets/css/styles.css" />
+
+  <link rel="stylesheet" href="assets/css/game.css" />
 </head>
-<body>
-  <main class="container">
-    <header class="topbar">
-      <a class="link" href="index.html">← Accueil</a>
-      <div id="levelTag" class="tag">Niveau</div>
-      <div id="tries" class="tries">Essais : 6</div>
+
+<body class="game-body">
+  <div class="game-screen">
+
+    <!-- HEADER DU JEU -->
+    <header class="game-header">
+      <a class="back-btn" href="index.html">←</a>
+
+      <div class="header-right">
+        <div id="levelTag" class="level-tag">Niveau</div>
+        <div id="tries" class="tries-pill">Essais : 6</div>
+      </div>
     </header>
 
-    <section class="board">
-      
-      <div class="hangman">
-        <svg viewBox="0 0 200 220" aria-label="Pendu">
-         
-          <line x1="20" y1="200" x2="180" y2="200" class="pole"/>
-          <line x1="50" y1="200" x2="50" y2="20"  class="pole"/>
-          <line x1="50" y1="20"  x2="130" y2="20" class="pole"/>
-          <line x1="130" y1="20" x2="130" y2="45" class="pole"/>
+    <!-- ZONE PENDU + MOT -->
+    <section class="game-area">
 
-         
-          <circle id="h-head" cx="130" cy="60" r="15" class="piece" />
-          <line   id="h-body" x1="130" y1="75" x2="130" y2="120" class="piece" />
-          <line   id="h-armL" x1="130" y1="90" x2="110" y2="110" class="piece" />
-          <line   id="h-armR" x1="130" y1="90" x2="150" y2="110" class="piece" />
-          <line   id="h-legL" x1="130" y1="120" x2="112" y2="150" class="piece" />
-          <line   id="h-legR" x1="130" y1="120" x2="148" y2="150" class="piece" />
-        </svg>
+      <div class="hangman-wrapper">
+        <div class="hangman">
+          <svg viewBox="0 0 200 220" aria-label="Pendu">
+
+            <!-- Poteau -->
+            <line x1="20" y1="200" x2="180" y2="200" class="pole"/>
+            <line x1="50" y1="200" x2="50" y2="20"  class="pole"/>
+            <line x1="50" y1="20"  x2="130" y2="20" class="pole"/>
+            <line x1="130" y1="20" x2="130" y2="45" class="pole"/>
+
+            <!-- Corps du pendu -->
+            <circle cx="130" cy="60" r="15" class="body-part" id="partHead" style="visibility:hidden"/>
+            <line x1="130" y1="75" x2="130" y2="120" class="body-part" id="partBody" style="visibility:hidden"/>
+            <line x1="130" y1="85" x2="110" y2="105" class="body-part" id="partArmL" style="visibility:hidden"/>
+            <line x1="130" y1="85" x2="150" y2="105" class="body-part" id="partArmR" style="visibility:hidden"/>
+            <line x1="130" y1="120" x2="115" y2="150" class="body-part" id="partLegL" style="visibility:hidden"/>
+            <line x1="130" y1="120" x2="145" y2="150" class="body-part" id="partLegR" style="visibility:hidden"/>
+          </svg>
+        </div>
       </div>
 
-      <div id="word" class="word">_ _ _ _</div>
-      <div id="used" class="used">Lettres : —</div>
-      <div id="hint" class="hint" hidden>Indice : —</div>
+      <div class="word-box">
+        <div id="word" class="word-line">_ _ _ _</div>
+        <div id="used" class="used-line">Lettres : —</div>
+        <div id="hint" class="hint-line" hidden>Indice : —</div>
+      </div>
+
     </section>
 
-    <section id="keyboard" class="keyboard"></section>
+    <!-- CLAVIER -->
+    <section class="keyboard-area">
+      <div id="keyboard" class="keyboard-grid"></div>
+    </section>
 
-    <footer class="actions">
-      <button id="btnRestart" class="btn">Rejouer</button>
-      <button id="btnHome" class="btn outline">Accueil</button>
+    <!-- FOOTER ACTIONS -->
+    <footer class="game-footer">
+      <button id="btnRestart" class="action-btn">Rejouer</button>
+      <button id="btnHome" class="outline-btn">Accueil</button>
     </footer>
-  </main>
+
+  </div>
 
   <script src="assets/js/game.js"></script>
 </body>

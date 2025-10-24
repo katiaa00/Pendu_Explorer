@@ -1,137 +1,178 @@
+const levelTag = document.getElementById("levelTag");
+const triesEl = document.getElementById("tries");
+const wordEl = document.getElementById("word");
+const usedEl = document.getElementById("used");
+const hintEl = document.getElementById("hint");
+const keyboardEl = document.getElementById("keyboard");
 
-const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-const q = new URLSearchParams(location.search);
-const level = (q.get("level") || "soft").toLowerCase();
-const triesMax = 6;
+const btnRestart = document.getElementById("btnRestart");
+const btnHome = document.getElementById("btnHome");
 
-function norm(s) {
-  return s.normalize("NFD").replace(/\p{Diacritic}/gu, "").toUpperCase();
-}
-function isLetter(ch) { return /^[A-Z]$/.test(ch); }
-function byId(id) { return document.getElementById(id); }
+// Récupération du niveau 
+const urlParams = new URLSearchParams(window.location.search);
+const level = urlParams.get("level") || "soft";
 
+// On affiche le niveau dans le header
+levelTag.textContent = `Niveau : ${level === "hard" ? "Hard" : "Soft"}`;
 
-const WORDS = {
+// Variables de jeu
+let currentWord = "";
+let hiddenWord = [];
+let usedLetters = [];
+let mistakes = 0;
+const maxMistakes = 6;
+
+// Récupération des morceaux du pendu dans l'ordre
+const hangmanParts = [
+  document.getElementById("partHead"),
+  document.getElementById("partBody"),
+  document.getElementById("partArmL"),
+  document.getElementById("partArmR"),
+  document.getElementById("partLegL"),
+  document.getElementById("partLegR"),
+];
+
+// LISTE DES PAYS ---
+const words = {
   soft: [
-    "France","Italie","Espagne","Maroc","Tunisie","Algérie","Portugal",
-    "Sénégal","Canada","Brésil","Argentine","Mexique","Chine","Japon",
-    "Inde","Turquie","Grèce","Allemagne","Suisse","Belgique"
+    { word: "france", hint: "Pays d'Europe de l'Ouest " },
+    { word: "espagne", hint: "Pays célèbre pour la paella " },
+    { word: "italie", hint: "Pays des pizzas et du Colisée " },
+    { word: "inde", hint: "Pays du Taj Mahal " },
+    { word: "chine", hint: "Le pays le plus peuplé 🇨🇳" },
   ],
   hard: [
-    "Azerbaïdjan","Kirghizistan","Bosnie-Herzégovine","Tchécoslovaquie",
-    "Liechtenstein","Mozambique","Luxembourg","Ouzbékistan","Papouasie",
-    "Tanzanie","Mauritanie","Macédoine","Guatemala","Nicaragua","Zimbabwe",
-    "Émirats arabes unis","Arabie saoudite","République tchèque","Slovaquie","Seychelles"
-  ]
+    { word: "kirghizistan", hint: "Pays montagneux d'Asie centrale " },
+    { word: "azerbaidjan", hint: "Pays du Caucase " },
+    { word: "liechtenstein", hint: "Petit pays entre Suisse et Autriche " },
+    { word: "mozambique", hint: "Pays d’Afrique australe " },
+    { word: "ouzbekistan", hint: "Pays des steppes d’Asie centrale " },
+  ],
 };
 
-const HANGMAN_PARTS = ["h-head","h-body","h-armL","h-armR","h-legL","h-legR"];
-function hideAllParts() { HANGMAN_PARTS.forEach(id => { const el = byId(id); if (el) el.style.visibility = "hidden"; }); }
-function updateHangman() {
-  const wrong = triesMax - tries;
-  HANGMAN_PARTS.forEach((id, idx) => {
-    const el = byId(id);
-    if (el) el.style.visibility = idx < wrong ? "visible" : "hidden";
-  });
+//INITIALISATION DU JEU ---
+
+function initGame() {
+  mistakes = 0;
+  usedLetters = [];
+
+  // Réinitialiser les parties du pendu
+  hangmanParts.forEach((part) => (part.style.visibility = "hidden"));
+
+  // Choisir un mot au hasard selon le niveau
+  const list = words[level];
+  const random = list[Math.floor(Math.random() * list.length)];
+  currentWord = random.word.toUpperCase();
+  hiddenWord = currentWord.split("").map((l) => (l === " " ? " " : "_"));
+
+  // Mettre à jour l’affichage du mot et des lettres utilisées
+  wordEl.textContent = hiddenWord.join(" ");
+  usedEl.textContent = "Lettres : —";
+  triesEl.textContent = `Essais : ${maxMistakes}`;
+
+  // Gérer l'indice selon le niveau
+  if (level === "soft") {
+    hintEl.hidden = false;
+    hintEl.textContent = `Indice : ${random.hint}`;
+  } else {
+    hintEl.hidden = true;
+    hintEl.textContent = "";
+  }
+
+  // Recréer le clavier
+  createKeyboard();
 }
 
 
-let secretRaw = "";  
-let secret = "";    
-let display = [];    
-let tries = triesMax;
-let used = new Set();
+// CLAVIER VIRTUEL ---
 
-function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-
-function startGame() {
-  const list = WORDS[level] || WORDS.soft;
-  secretRaw = pickRandom(list);
-  secret = norm(secretRaw);
-  tries = triesMax;
-  used = new Set();
-
- 
-  display = secretRaw.split("").map(ch => {
-    const n = norm(ch);
-    if (isLetter(n)) return "_";
-    if (ch === " " || ch === "-" || ch === "’" || ch === "'") return ch;
-    return ch;
-  });
-
-  byId("levelTag").textContent = `Niveau : ${level === "hard" ? "Hard" : "Soft"}`;
-  hideAllParts();
-  render();
-  buildKeyboard();
-}
-
-function render() {
-  byId("word").textContent = display.join(" ");
-  byId("tries").textContent = `Essais : ${tries}`;
-  byId("used").textContent = used.size ? `Lettres : ${[...used].join(" ")}` : "Lettres : —";
-  updateHangman();
-}
-
-function buildKeyboard() {
-  const k = byId("keyboard");
-  k.innerHTML = "";
-  ALPHABET.forEach(L => {
+function createKeyboard() {
+  keyboardEl.innerHTML = "";
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  letters.forEach((letter) => {
     const btn = document.createElement("button");
     btn.className = "key";
-    btn.textContent = L;
-    btn.disabled = used.has(L) || isFinished();
-    btn.addEventListener("click", () => onGuess(L, btn));
-    k.appendChild(btn);
+    btn.textContent = letter;
+    btn.addEventListener("click", () => handleLetter(letter, btn));
+    keyboardEl.appendChild(btn);
   });
 }
 
-function onGuess(L, btnEl) {
-  if (isFinished() || used.has(L)) return;
-  used.add(L);
+// GESTION D’UNE LETTRE ---
 
-  let hit = false;
-  for (let i = 0; i < secret.length; i++) {
-    if (secret[i] === L) {
-      display[i] = secretRaw[i]; 
-      hit = true;
-    }
+function handleLetter(letter, btn) {
+  if (usedLetters.includes(letter)) return;
+
+  usedLetters.push(letter);
+  usedEl.textContent = `Lettres : ${usedLetters.join(" ")}`;
+
+  if (currentWord.includes(letter)) {
+    // Bonne lettre 
+    revealLetter(letter);
+    btn.classList.add("hit");
+  } else {
+    // Mauvaise lettre 
+    mistakes++;
+    btn.classList.add("miss");
+    showNextPart(mistakes);
   }
 
-  if (!hit) { tries--; btnEl?.classList.add("miss"); }
-  else { btnEl?.classList.add("hit"); }
-  btnEl.disabled = true;
+  btn.disabled = true;
+  updateTries();
 
-  render();
+  // Vérifier victoire/défaite
+  checkGameStatus();
+}
 
-  if (isWin()) {
-    setTimeout(() => alert(`Bravo ! Le pays était : ${secretRaw}`), 10);
-    disableKeys();
-  } else if (isLose()) {
-    revealWord();
-    setTimeout(() => alert(`Dommage… Le pays était : ${secretRaw}`), 10);
-    disableKeys();
+//AFFICHER LA PROCHAINE PARTIE DU PENDU ---
+
+function showNextPart(errorsCount) {
+  if (hangmanParts[errorsCount - 1]) {
+    hangmanParts[errorsCount - 1].style.visibility = "visible";
   }
 }
 
-function disableKeys() { document.querySelectorAll(".key").forEach(b => b.disabled = true); }
-function isWin() { return !display.includes("_"); }
-function isLose() { return tries <= 0; }
-function isFinished() { return isWin() || isLose(); }
-function revealWord() { display = secretRaw.split(""); render(); }
+// METTRE À JOUR LES ESSAIS RESTANTS ---
 
+function updateTries() {
+  const remaining = maxMistakes - mistakes;
+  triesEl.textContent = `Essais : ${remaining}`;
+}
 
-window.addEventListener("keydown", (e) => {
-  if (isFinished()) return;
-  const L = norm(e.key).slice(0,1);
-  if (!isLetter(L)) return;
-  const btn = [...document.querySelectorAll(".key")].find(b => b.textContent === L);
-  onGuess(L, btn);
+// RÉVÉLER LES LETTRES TROUVÉES ---
+
+function revealLetter(letter) {
+  currentWord.split("").forEach((l, i) => {
+    if (l === letter) hiddenWord[i] = letter;
+  });
+  wordEl.textContent = hiddenWord.join(" ");
+}
+
+// VÉRIFIER L’ÉTAT DU JEU ---
+
+function checkGameStatus() {
+  if (!hiddenWord.includes("_")) {
+    // Gagné 
+    setTimeout(() => {
+      alert("Bravo ! Tu as trouvé le mot 🎉");
+      initGame();
+    }, 400);
+  } else if (mistakes >= maxMistakes) {
+    // Perdu 
+    setTimeout(() => {
+      alert(`Perdu ! Le mot était : ${currentWord}`);
+      initGame();
+    }, 400);
+  }
+}
+
+// BOUTONS ---
+
+btnRestart.addEventListener("click", initGame);
+btnHome.addEventListener("click", () => {
+  window.location.href = "index.html";
 });
 
+// LANCEMENT INITIAL ---
 
-byId("btnRestart").addEventListener("click", startGame);
-byId("btnHome").addEventListener("click", () => location.href = "index.html");
-
-
-startGame();
+initGame();
