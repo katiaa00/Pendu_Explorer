@@ -3,27 +3,127 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pendu Explorer — Pays</title>
+  <title>Pendu Explorer</title>
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
-  <main class="container">
-    <h1>Pendu Explorer — Pays</h1>
-    <p class="subtitle">Devine le nom du pays. Choisis un niveau :</p>
+<body class="app-body">
+  <div class="app-screen">
 
-    <div class="levels">
-      <a class="btn" href="game.html?level=soft">Niveau Soft</a>
-      <a class="btn outline" href="game.html?level=hard">Niveau Hard</a>
-    </div>
+    <!-- header -->
+    <header class="app-header">
+      <div class="logo-block">
+        <div class="logo-circle">
+          🌍
+        </div>
+        <div class="logo-texts">
+          <div class="logo-title">Pendu Explorer</div>
+          <div class="logo-sub">Devine les pays</div>
+        </div>
+      </div>
 
-    <section class="rules">
-      <h2>Règles</h2>
-      <ul>
-        <li>Tu as <strong>6 essais</strong>.</li>
-        <li>Les accents/espaces ne pénalisent pas.</li>
-        <li>Joue via le clavier à l’écran ou ton clavier physique.</li>
-      </ul>
-    </section>
-  </main>
+      <button class="info-btn" id="rulesBtn">?</button>
+
+    </header>
+
+    <!-- select -->
+    <main class="mode-select-card">
+      <h2 class="mode-select-title">Choisis ton mode</h2>
+
+      <p class="mode-select-hint">Deux styles. Même but : SURVIVRE avec 6 essais.</p>
+
+      <div class="mode-buttons">
+        <!-- SOFT -->
+        <a class="mode-button mode-easy" href="game.html?level=soft">
+          <div class="mode-left">
+            <img src="assets/img/soft.png" alt="Facile" class="mode-icon-img" />
+          </div>
+          <div class="mode-right">
+            <div class="mode-row-top">
+              <span class="mode-name">Facile</span>
+              <span class="badge badge-easy">Débutant</span>
+            </div>
+            <div class="mode-desc-short">
+              Pays connus, orthographe simple.
+            </div>
+          </div>
+        </a>
+
+        <!-- HARD -->
+        <a class="mode-button mode-hard" href="game.html?level=hard">
+          <div class="mode-left">
+            <img src="assets/img/hard.png" alt="Difficile" class="mode-icon-img" />
+          </div>
+          <div class="mode-right">
+            <div class="mode-row-top">
+              <span class="mode-name">Difficile</span>
+              <span class="badge badge-hard">Expert</span>
+            </div>
+            <div class="mode-desc-short">
+              Noms impossibles à écrire 😈
+            </div>
+          </div>
+        </a>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <div class="footer-stats">
+        <div class="stat-box">
+          <div class="stat-value">6</div>
+          <div class="stat-label">Essais</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">2</div>
+          <div class="stat-label">Modes</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-value">∞</div>
+          <div class="stat-label">Pays</div>
+        </div>
+      </div>
+
+      <div class="footer-copy">Pendu Explorer · v1</div>
+    </footer>
+  </div>
+
+<div class="rules-overlay" id="rulesOverlay">
+  <div class="rules-modal">
+    <h3>Règles du jeu</h3>
+    <ul>
+      <li>Tu as 6 erreurs max.</li>
+      <li>Chaque lettre ratée dessine le pendu.</li>
+      <li>Les accents et espaces ne comptent pas contre toi.</li>
+      <li>Tu peux jouer au clavier ou en touch.</li>
+    </ul>
+    <button class="close-modal-btn" id="closeRules">OK</button>
+  </div>
+</div>
+
+
+<script>
+  const rulesBtn = document.getElementById('rulesBtn');
+  const rulesOverlay = document.getElementById('rulesOverlay');
+  const closeRules = document.getElementById('closeRules');
+
+  // ouvrir la modale
+  rulesBtn.addEventListener('click', () => {
+    rulesOverlay.classList.add('open');
+  });
+
+  // fermer via bouton OK
+  closeRules.addEventListener('click', () => {
+    rulesOverlay.classList.remove('open');
+  });
+
+  // fermer en cliquant 
+  rulesOverlay.addEventListener('click', (e) => {
+    if (e.target === rulesOverlay) {
+      rulesOverlay.classList.remove('open');
+    }
+  });
+</script>
+
+
 </body>
 </html>
