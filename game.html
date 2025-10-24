@@ -3,10 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Pendu Explorer</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#0f1a10" />
+
+  <!-- iOS fullscreen -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <title>Pendu Explorer — Jeu</title>
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Pendu" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
 
   <link rel="stylesheet" href="assets/css/game.css" />
 </head>
@@ -70,5 +78,14 @@
   </div>
 
   <script src="assets/js/game.js"></script>
+  <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("service-worker.js")
+      .catch(err => {
+        console.log("SW registration failed:", err);
+      });
+  }
+</script>
+
 </body>
 </html>
