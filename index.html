@@ -7,18 +7,17 @@
   <title>Pendu Explorer</title>
 
   <!-- PWA manifest -->
-  <link rel="manifest" href="manifest.json" />
+  <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#0f1a10" />
 
-  <!-- iOS fullscreen -->
+  <!-- iOS fullscreen / icône écran d'accueil -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Pendu" />
-  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="apple-mobile-web-app-title" content="Pendu Explorer" />
+  <link rel="apple-touch-icon" href="/icon-192.png" />
 
   <link rel="stylesheet" href="assets/css/style.css" />
 </head>
-
 
 <body class="app-body">
   <div class="app-screen">
@@ -26,9 +25,7 @@
     <!-- header -->
     <header class="app-header">
       <div class="logo-block">
-        <div class="logo-circle">
-          🌍
-        </div>
+        <div class="logo-circle">🌍</div>
         <div class="logo-texts">
           <div class="logo-title">Pendu Explorer</div>
           <div class="logo-sub">Devine les pays</div>
@@ -136,14 +133,15 @@
       }
     });
   </script>
+
   <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js")
-      .catch(err => {
-        console.log("SW registration failed:", err);
-      });
-  }
-</script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("/service-worker.js")
+        .catch(err => {
+          console.log("SW registration failed:", err);
+        });
+    }
+  </script>
 
 </body>
 </html>
