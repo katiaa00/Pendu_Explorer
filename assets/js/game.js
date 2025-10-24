@@ -1,4 +1,4 @@
-// --- Constantes & utilitaires ---
+
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const q = new URLSearchParams(location.search);
 const level = (q.get("level") || "soft").toLowerCase();
@@ -10,7 +10,7 @@ function norm(s) {
 function isLetter(ch) { return /^[A-Z]$/.test(ch); }
 function byId(id) { return document.getElementById(id); }
 
-// --- Dataset local : pays ---
+
 const WORDS = {
   soft: [
     "France","Italie","Espagne","Maroc","Tunisie","Algérie","Portugal",
@@ -25,7 +25,6 @@ const WORDS = {
   ]
 };
 
-// --- Dessin du pendu : ordre d'apparition (6 erreurs) ---
 const HANGMAN_PARTS = ["h-head","h-body","h-armL","h-armR","h-legL","h-legR"];
 function hideAllParts() { HANGMAN_PARTS.forEach(id => { const el = byId(id); if (el) el.style.visibility = "hidden"; }); }
 function updateHangman() {
@@ -36,16 +35,16 @@ function updateHangman() {
   });
 }
 
-// --- État du jeu ---
-let secretRaw = "";  // mot avec accents/espaces pour affichage
-let secret = "";     // normalisé (A-Z)
-let display = [];    // tableau "_", espaces, tirets…
+
+let secretRaw = "";  
+let secret = "";    
+let display = [];    
 let tries = triesMax;
 let used = new Set();
 
 function pickRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
-// --- Initialisation ---
+
 function startGame() {
   const list = WORDS[level] || WORDS.soft;
   secretRaw = pickRandom(list);
@@ -53,7 +52,7 @@ function startGame() {
   tries = triesMax;
   used = new Set();
 
-  // Remplit l'affichage 
+ 
   display = secretRaw.split("").map(ch => {
     const n = norm(ch);
     if (isLetter(n)) return "_";
@@ -94,7 +93,7 @@ function onGuess(L, btnEl) {
   let hit = false;
   for (let i = 0; i < secret.length; i++) {
     if (secret[i] === L) {
-      display[i] = secretRaw[i]; // conserve l'accent
+      display[i] = secretRaw[i]; 
       hit = true;
     }
   }
@@ -121,7 +120,7 @@ function isLose() { return tries <= 0; }
 function isFinished() { return isWin() || isLose(); }
 function revealWord() { display = secretRaw.split(""); render(); }
 
-// Clavier physique
+
 window.addEventListener("keydown", (e) => {
   if (isFinished()) return;
   const L = norm(e.key).slice(0,1);
@@ -130,9 +129,9 @@ window.addEventListener("keydown", (e) => {
   onGuess(L, btn);
 });
 
-// Boutons
+
 byId("btnRestart").addEventListener("click", startGame);
 byId("btnHome").addEventListener("click", () => location.href = "index.html");
 
-// Go
+
 startGame();

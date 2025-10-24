@@ -1,11 +1,11 @@
-/* ---------- Thème & background ---------- */
+
 :root{
   --bg:#0c0f1e;
-  --bg-1:#0f1224;
-  --bg-2:#11183b;
-  --glass:#141a33cc;           
-  --glass-soft:#141a33a6;
-  --stroke:#2b3564;
+  --bg-1:#2740cd;
+  --bg-2:#5a69b5;
+  --glass:#8f9dd4cc;           
+  --glass-soft:#445ab2a6;
+  --stroke:#6172be;
   --text:#eef1ff;
   --muted:#aab0d6;
   --accent:#7aa2ff;
@@ -19,10 +19,10 @@
 html,body{
   margin:0; padding:0; color:var(--text);
   font-family:ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji";
-  /* Fond: dégradés + léger quadrillage */
+ 
   background:
-    radial-gradient(1200px 600px at 10% -10%, #1b2352 0%, transparent 60%),
-    radial-gradient(1000px 500px at 110% 0%, #1a274a 0%, transparent 55%),
+    radial-gradient(1200px 600px at 10% -10%, #5a68b6 0%, transparent 60%),
+    radial-gradient(1000px 500px at 110% 0%, #4a64a9 0%, transparent 55%),
     linear-gradient(180deg, var(--bg-1), var(--bg));
   position:relative;
 }
@@ -37,11 +37,10 @@ html::before{
 
 .container{max-width:1024px; margin:0 auto; padding:24px}
 
-/* ---------- Titres / textes ---------- */
 h1{margin:8px 0 4px; font-size:clamp(26px,3.2vw,40px); letter-spacing:.5px}
 .subtitle{color:var(--muted); margin:0 0 18px}
 
-/* ---------- Boutons  ---------- */
+
 .btn{
   background: linear-gradient(135deg, var(--accent), var(--accent-2));
   color:#0b0e1a; border:none; padding:12px 18px; border-radius:14px;
@@ -60,7 +59,7 @@ h1{margin:8px 0 4px; font-size:clamp(26px,3.2vw,40px); letter-spacing:.5px}
 
 .levels{display:flex; gap:14px; flex-wrap:wrap; margin:14px 0 26px}
 
-/* ---------- Cartes---------- */
+
 .rules, .board{
   background: var(--glass);
   border:1px solid rgba(255,255,255,.08);
@@ -69,19 +68,19 @@ h1{margin:8px 0 4px; font-size:clamp(26px,3.2vw,40px); letter-spacing:.5px}
 }
 .rules h2{margin:0 0 10px}
 
-/* ---------- Topbar ---------- */
+
 .topbar{
   display:grid; grid-template-columns:1fr auto auto; gap:12px; align-items:center; margin-bottom:16px;
 }
 .link{color:var(--accent); text-decoration:none; font-weight:700}
 .tag{
-  background: linear-gradient(135deg,#222c58,#1b2145);
+  background: linear-gradient(135deg,#5b6cb6,#7581c6);
   padding:6px 12px; border-radius:999px; font-size:14px; border:1px solid rgba(255,255,255,.08);
   box-shadow: inset 0 0 8px rgba(0,0,0,.25);
 }
 .tries{color:var(--muted); font-weight:700}
 
-/* ---------- Zone mot / indices ---------- */
+
 .word{
   margin-top:8px;
   font-size:clamp(28px,6.2vw,44px);
@@ -92,23 +91,23 @@ h1{margin:8px 0 4px; font-size:clamp(26px,3.2vw,40px); letter-spacing:.5px}
 }
 .used, .hint{color:var(--muted); margin-top:10px; font-size:14px}
 
-/* ---------- Hangman (SVG) ---------- */
+
 .hangman{display:flex; justify-content:center; margin-bottom:14px}
 .hangman svg{width:min(520px, 92%); height:auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,.35))}
 .pole{ stroke:url(#poleGradient); stroke-width:7; stroke-linecap:round }
 .piece{
   stroke: var(--danger); stroke-width:6; stroke-linecap:round; fill:none;
   visibility:hidden; opacity:0; transition: opacity .35s ease;
-  /* effet “trace” */
+
   stroke-dasharray: 160; stroke-dashoffset: 160; transition: stroke-dashoffset .6s ease, opacity .35s ease;
 }
-/* Astuce: le JS met style="visibility: visible" -> on cible cet état */
+
 .piece[style*="visible"]{ opacity:1; stroke-dashoffset:0 }
 
-/* (dégradé faux pour le mât via filter, mais on laisse une base solide) */
+
 .pole{ stroke:#2f3b77 }
 
-/* ---------- Clavier ---------- */
+
 .keyboard{
   display:grid; gap:10px;
   grid-template-columns: repeat(9, 1fr);
@@ -116,7 +115,7 @@ h1{margin:8px 0 4px; font-size:clamp(26px,3.2vw,40px); letter-spacing:.5px}
 @media (max-width:880px){ .keyboard{ grid-template-columns: repeat(8, 1fr) } }
 @media (max-width:640px){ .keyboard{ grid-template-columns: repeat(7, 1fr) } }
 .key{
-  background: linear-gradient(180deg,#212848,#1a2041);
+  background: linear-gradient(180deg,#7588db,#737ebd);
   border:1px solid var(--stroke); color:var(--text);
   padding:12px 0; border-radius:12px; text-align:center; cursor:pointer;
   user-select:none; font-weight:900; letter-spacing:.5px;
@@ -142,17 +141,17 @@ h1{margin:8px 0 4px; font-size:clamp(26px,3.2vw,40px); letter-spacing:.5px}
   75%{ transform:translateX(-1px) }
 }
 
-/* ---------- Actions ---------- */
+
 .actions{ display:flex; gap:12px; justify-content:center; margin-top:18px }
 .actions .btn{ padding:12px 22px }
 .actions .btn.outline{ border-color:#9bb0ff }
 
-/* ---------- Cartes secondaires ---------- */
+
 .rules{
   background: var(--glass-soft);
 }
 
-/* ---------- Mode clair  ---------- */
+
 @media (prefers-color-scheme: light){
   :root{
     --bg:#eef2ff;
