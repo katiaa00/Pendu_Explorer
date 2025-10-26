@@ -61,7 +61,6 @@ const words = {
   hard: [
     { word: "azerbaidjan", hint: "Pays du Caucase 🇦🇿" },
     { word: "kirghizistan", hint: "Pays montagneux d’Asie centrale 🇰🇬" },
-    { word: "bosnieherzegovine", hint: "Pays des Balkans 🇧🇦" },
     { word: "tchecoslovaquie", hint: "Ancien pays d’Europe de l’Est 🇨🇿🇸🇰" },
     { word: "liechtenstein", hint: "Petit pays entre la Suisse et l’Autriche 🇱🇮" },
     { word: "mozambique", hint: "Pays d’Afrique australe 🇲🇿" },
@@ -74,9 +73,6 @@ const words = {
     { word: "guatemala", hint: "Pays d’Amérique centrale 🇬🇹" },
     { word: "nicaragua", hint: "Pays d’Amérique centrale 🇳🇮" },
     { word: "zimbabwe", hint: "Pays d’Afrique australe 🇿🇼" },
-    { word: "emiratsarabesunis", hint: "Pays du golfe Persique 🇦🇪" },
-    { word: "arabiesaoudite", hint: "Pays du pèlerinage à La Mecque 🇸🇦" },
-    { word: "republiquetcheque", hint: "Pays d’Europe centrale 🇨🇿" },
     { word: "slovaquie", hint: "Pays d’Europe centrale 🇸🇰" },
     { word: "seychelles", hint: "Archipel de l’océan Indien 🇸🇨" }
   ]
