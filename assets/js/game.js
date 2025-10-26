@@ -33,22 +33,55 @@ const hangmanParts = [
 ];
 
 // LISTE DES PAYS ---
+// --- LISTE DES PAYS ---
 const words = {
   soft: [
-    { word: "france", hint: "Pays d'Europe de l'Ouest " },
-    { word: "espagne", hint: "Pays célèbre pour la paella " },
+    { word: "france", hint: "Pays d’Europe de l’Ouest " },
     { word: "italie", hint: "Pays des pizzas et du Colisée " },
+    { word: "espagne", hint: "Pays du soleil et de la paella " },
+    { word: "maroc", hint: "Pays d’Afrique du Nord, célèbre pour Marrakech " },
+    { word: "tunisie", hint: "Pays d’Afrique du Nord, connu pour ses plages " },
+    { word: "algérie", hint: "Plus grand pays d’Afrique " },
+    { word: "portugal", hint: "Pays de Lisbonne et du fado " },
+    { word: "sénégal", hint: "Pays d’Afrique de l’Ouest " },
+    { word: "canada", hint: "Pays des grands espaces et du sirop d’érable " },
+    { word: "brésil", hint: "Pays du carnaval et du football " },
+    { word: "argentine", hint: "Pays de Messi et du tango " },
+    { word: "mexique", hint: "Pays des tacos et des pyramides mayas " },
+    { word: "chine", hint: "Pays le plus peuplé du monde " },
+    { word: "japon", hint: "Pays du soleil levant " },
     { word: "inde", hint: "Pays du Taj Mahal " },
-    { word: "chine", hint: "Le pays le plus peuplé 🇨🇳" },
+    { word: "turquie", hint: "Pays à cheval entre Europe et Asie " },
+    { word: "grèce", hint: "Berceau de la mythologie " },
+    { word: "allemagne", hint: "Pays du mur de Berlin " },
+    { word: "suisse", hint: "Pays des montagnes et du chocolat " },
+    { word: "belgique", hint: "Pays des frites et des BD " }
   ],
+
   hard: [
-    { word: "kirghizistan", hint: "Pays montagneux d'Asie centrale " },
-    { word: "azerbaidjan", hint: "Pays du Caucase " },
-    { word: "liechtenstein", hint: "Petit pays entre Suisse et Autriche " },
-    { word: "mozambique", hint: "Pays d’Afrique australe " },
-    { word: "ouzbekistan", hint: "Pays des steppes d’Asie centrale " },
-  ],
+    { word: "azerbaidjan", hint: "Pays du Caucase 🇦🇿" },
+    { word: "kirghizistan", hint: "Pays montagneux d’Asie centrale 🇰🇬" },
+    { word: "bosnieherzegovine", hint: "Pays des Balkans 🇧🇦" },
+    { word: "tchecoslovaquie", hint: "Ancien pays d’Europe de l’Est 🇨🇿🇸🇰" },
+    { word: "liechtenstein", hint: "Petit pays entre la Suisse et l’Autriche 🇱🇮" },
+    { word: "mozambique", hint: "Pays d’Afrique australe 🇲🇿" },
+    { word: "luxembourg", hint: "Petit pays européen 🇱🇺" },
+    { word: "ouzbekistan", hint: "Pays d’Asie centrale 🇺🇿" },
+    { word: "papouasie", hint: "Île d’Océanie 🇵🇬" },
+    { word: "tanzanie", hint: "Pays du Kilimandjaro 🇹🇿" },
+    { word: "mauritanie", hint: "Pays désertique d’Afrique de l’Ouest 🇲🇷" },
+    { word: "macedoine", hint: "Pays des Balkans 🇲🇰" },
+    { word: "guatemala", hint: "Pays d’Amérique centrale 🇬🇹" },
+    { word: "nicaragua", hint: "Pays d’Amérique centrale 🇳🇮" },
+    { word: "zimbabwe", hint: "Pays d’Afrique australe 🇿🇼" },
+    { word: "emiratsarabesunis", hint: "Pays du golfe Persique 🇦🇪" },
+    { word: "arabiesaoudite", hint: "Pays du pèlerinage à La Mecque 🇸🇦" },
+    { word: "republiquetcheque", hint: "Pays d’Europe centrale 🇨🇿" },
+    { word: "slovaquie", hint: "Pays d’Europe centrale 🇸🇰" },
+    { word: "seychelles", hint: "Archipel de l’océan Indien 🇸🇨" }
+  ]
 };
+
 
 //INITIALISATION DU JEU ---
 
